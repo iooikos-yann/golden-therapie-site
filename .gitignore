@@ -1,0 +1,5 @@
+# Sources lourdes / sous licence — hors dépôt public
+*.zip
+Triptico*.pdf
+.DS_Store
+.claude/
