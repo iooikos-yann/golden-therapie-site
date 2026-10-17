@@ -33,7 +33,7 @@ TEXTS = [
     ('Massages', 'Massages', 'Massagens'),
     ('Des soins personnalisés pour votre santé et votre beauté.', 'Personalised care for your health and beauty.', 'Cuidados personalizados para a sua saúde e beleza.'),
     ('Pour une meilleure qualité de vie.', 'For a better quality of life.', 'Para uma melhor qualidade de vida.'),
-    ('Galets alignés sur le sable', 'Pebbles lined up on sand', 'Seixos alinhados na areia'),
+    ('Massage aux pierres chaudes', 'Hot stone massage', 'Massagem com pedras quentes'),
     # Kinésithérapie
     ('KINÉSITHÉRAPIE', 'PHYSIOTHERAPY', 'FISIOTERAPIA'),
     ('Dos et colonne vertébrale', 'Back and spine', 'Costas e coluna vertebral'),
