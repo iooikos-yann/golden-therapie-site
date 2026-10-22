@@ -233,6 +233,15 @@ RAW = [
 ]
 
 LANG_SWITCH = re.compile(r'<!--lang-->.*?<!--/lang-->', re.S)
+SEO = re.compile(r'<!--seo-->.*?<!--/seo-->', re.S)
+SITE_URL = 'https://goldentherapie.lu/'
+
+
+def seo(cur):
+    tags = [f'<link rel="canonical" href="{SITE_URL}{LANGS[cur]["dir"]}">']
+    tags += [f'<link rel="alternate" hreflang="{cfg["html"]}" href="{SITE_URL}{cfg["dir"]}">' for cfg in LANGS.values()]
+    tags.append(f'<link rel="alternate" hreflang="x-default" href="{SITE_URL}">')
+    return '<!--seo-->' + ''.join(tags) + '<!--/seo-->'
 
 
 def lang_switch(cur):
@@ -274,9 +283,11 @@ def translate(html, idx):
 
 def main():
     src = SRC.read_text(encoding='utf-8')
-    if '<!--lang-->' not in src:
-        sys.exit('marqueur <!--lang--> absent de index.html')
-    SRC.write_text(LANG_SWITCH.sub(lang_switch('fr'), src), encoding='utf-8')
+    for marker in ('<!--lang-->', '<!--seo-->'):
+        if marker not in src:
+            sys.exit(f'marqueur {marker} absent de index.html')
+    src = SEO.sub(seo('fr'), LANG_SWITCH.sub(lang_switch('fr'), src))
+    SRC.write_text(src, encoding='utf-8')
     for idx, code in ((1, 'en'), (2, 'pt')):
         html, missing = translate(src, idx)
         if missing:
@@ -286,7 +297,7 @@ def main():
                     .replace('href="assets/', 'href="../assets/')
                     .replace('url(fonts/', 'url(../fonts/')
                     .replace('src="./support.js"', 'src="../support.js"'))
-        html = LANG_SWITCH.sub(lang_switch(code), html)
+        html = SEO.sub(seo(code), LANG_SWITCH.sub(lang_switch(code), html))
         out = ROOT / code / 'index.html'
         out.parent.mkdir(exist_ok=True)
         out.write_text(html, encoding='utf-8')
