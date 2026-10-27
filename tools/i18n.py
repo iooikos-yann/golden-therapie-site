@@ -91,6 +91,7 @@ TEXTS = [
     ('Durée', 'Duration', 'Duração'),
     ('Prix', 'Price', 'Preço'),
     ('1 soin trouvé', '1 treatment found', '1 tratamento encontrado'),
+    ('7ᵉ séance offerte', '7th session free', '7.ª sessão oferta'),
     # Tarifs — catégories et prestations
     ('Massage californien', 'Californian massage', 'Massagem californiana'),
     ('Massage soin géothermal', 'Geothermal massage treatment', 'Massagem geotermal'),
